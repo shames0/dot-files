@@ -30,14 +30,19 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 HOMEBREW_ROOT=/opt/homebrew
 
 
-# Set PATH, MANPATH, etc., for Homebrew.
+# Set PATH, MANPATH, etc., for Homebrew
 [ -x $HOMEBREW_ROOT/bin/brew ] \
     && eval "$($HOMEBREW_ROOT/bin/brew shellenv)"
 
 
-# Add homebrew installed gnu utits to PATH
+# Use gnu-make
 [ -d $HOMEBREW_ROOT/opt/make/libexec/gnubin ] \
     && PATH="$HOMEBREW_ROOT/opt/make/libexec/gnubin:$PATH"
+
+
+# Use gnu-getopt
+[ -x $HOMEBREW_ROOT/opt/gnu-getopt/bin ] \
+    && PATH="$HOMEBREW_ROOT/opt/gnu-getopt/bin:$PATH"
 
 
 # Pyenv
@@ -65,6 +70,11 @@ nvm_init() {
 }
 
 
+# Automatically activate python3 virtual environments
+
+source $HOME/code/community/venv_tools/venv_tools.zsh
+
+
 # ====== Google Cloud Shell Utilities ======
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -83,7 +93,10 @@ setopt PROMPT_SUBST
 
 # VCS (git) status
 autoload -Uz vcs_info
-precmd() { vcs_info }
+include_func="vcs_info" # register vcs_info as one of the chpwd functions if it's not already there
+if ! (($precmd_functions[(Ie)$include_func])); then
+    precmd_functions=( ${precmd_functions} vcs_info )
+fi
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr '%F{3}'

@@ -102,7 +102,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr '%F{3}'
 zstyle ':vcs_info:git:*' unstagedstr '%F{1}'
 zstyle ':vcs_info:*' actionformats '%f(%F{2}%u%c%b%F{3}|%F{1}%a%f) '
-zstyle ':vcs_info:*' formats '%f(%F{2}%u%c%b%f) '
+zstyle ':vcs_info:*' formats '%f(%F{2}%c%u%b%f) '
 
 # I don't like my work laptop hostname
 [[ $HOST =~ MBPR$ ]] && HN="waptop" || HN=$HOST

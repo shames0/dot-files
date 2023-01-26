@@ -101,8 +101,17 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr '%F{3}'
 zstyle ':vcs_info:git:*' unstagedstr '%F{1}'
-zstyle ':vcs_info:*' actionformats '%f(%F{2}%u%c%b%F{3}|%F{1}%a%f) '
-zstyle ':vcs_info:*' formats '%f(%F{2}%c%u%b%f) '
+zstyle ':vcs_info:*' actionformats '%f(%F{2}%m%c%u%b%F{3}|%F{1}%a%f) '
+zstyle ':vcs_info:*' formats '%f(%F{2}%m%c%u%b%f) '
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
++vi-git-untracked() { # report on untracked files
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+     git status --porcelain | grep -m 1 '^??' &>/dev/null
+  then
+    hook_com[misc]='%F{5}'
+  fi
+}
 
 # I don't like my work laptop hostname
 [[ $HOST =~ MBPR$ ]] && HN="waptop" || HN=$HOST
@@ -118,10 +127,10 @@ PROMPT='[%F{4}%n@$HN%f] %~ $vcs_info_msg_0_%f%# '
 ## highlight the current autocomplete option
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-## better ssh/rsync/scp autocomplete
-zstyle ':completion:*:(scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+# ## better ssh/rsync/scp autocomplete
+# zstyle ':completion:*:(scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 
 ## allow for autocomplete to be case insensitive
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \

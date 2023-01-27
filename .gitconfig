@@ -1,35 +1,38 @@
-[core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
-    excludesFile = ~/.gitignore
+[advice]
+	detachedHead = false
 
-[interactive]
-	diffFilter = diff-so-fancy --patch
+[alias]
+    lg = "log \
+            --graph \
+            --abbrev-commit \
+            --date=iso \
+            --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ad)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)'"
 
 [color]
 	ui = true
 
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+[core]
+    pager = delta
+    editor = vim
+    excludesFile = ~/.gitignore
+    whitespace = trailing-whitespace
 
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	func = 146 bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-
-[diff-so-fancy]
-	markEmptyLines = true
-	useUnicodeRuler = false
-	rulerWidth = 47
-
-[advice]
-	detachedHead = false
+[delta]
+    navigate = true
+    light = false
+    line-numbers = true
+    theme = "Visual Studio Dark+"
+    # side-by-side = true
+    # hyperlinks = true
 
 [init]
 	defaultBranch = master
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3  # added from delta docs
+
+[diff]
+    colorMoved = default   # added from delta docs

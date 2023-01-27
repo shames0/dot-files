@@ -1,0 +1,7 @@
+[flake8]
+max-line-length = 100
+
+# E701: multiple statements on one line (colon)
+# W391: blank line at end of file
+# E203: whitespace before ':'
+ignore = E701, W391, E203

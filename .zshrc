@@ -1,4 +1,3 @@
-
 # Allow for commeting out CLI lines
 setopt interactive_comments
 
@@ -13,6 +12,10 @@ alias bc='bc --mathlib'
 
 # Always use color for `grep`
 alias grep='grep --color'
+
+
+# use user-level config for python "black"
+alias black='black --config=$HOME/.black'
 
 
 # Preferred options for History

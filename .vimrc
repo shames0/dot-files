@@ -58,7 +58,7 @@ function! s:main_setup()
         \'https://github.com/nathanaelkane/vim-indent-guides',
       \],
       \'pack/shames0/opt': [
-        \'https://github.com/altercation/vim-colors-solarized',
+        \'https://github.com/tomasiser/vim-code-dark',
         \'https://github.com/editorconfig/editorconfig-vim',
         \'https://github.com/itchyny/lightline.vim',
         \'https://github.com/tpope/vim-fugitive',
@@ -80,13 +80,15 @@ function! s:main_setup()
   call s:ensure_installed(s:plugins)
 
   " Syntax highlighting
-  " packadd! vim-colors-solarized    " use solarized theme plugin
+  packadd! vim-code-dark
   syntax enable
 
-  " let g:solarized_termtrans=1      " not needed all the time
   set background=dark
-  "colorscheme solarized
-  colorscheme slate
+  colorscheme codedark
+
+  " manage unified diff (:Git diff) colors (must come after 'colorscheme')
+  hi diffAdded ctermfg=2 ctermbg=NONE cterm=NONE guifg=#50FA7B guibg=NONE gui=bold
+  hi diffRemoved ctermfg=1 ctermbg=NONE cterm=NONE guifg=#FA5057 guibg=NONE gui=NONE
 
   packadd! vim-fugitive            " use vim-fugitive plugin
   packadd! vim-fubitive            " use vim-fubitive plugin (bitbucket plugin)
@@ -103,6 +105,8 @@ function! s:main_setup()
 
   packadd! ale
   execute 'source ~/.vim/pack/shames0/ale_prefs.vim'
+  call ale#Set('python_flake8_options', '--config=$HOME/.flake8')
+  call ale#Set('python_black_options', '--config=$HOME/.black')
   let g:ale_set_quickfix = 1
 
 

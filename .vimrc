@@ -83,6 +83,7 @@ function! s:main_setup()
   packadd! vim-code-dark
   syntax enable
 
+  let g:codedark_transparent=1
   set background=dark
   colorscheme codedark
 

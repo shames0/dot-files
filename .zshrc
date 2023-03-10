@@ -19,6 +19,7 @@ alias black='black --config=$HOME/.black'
 
 
 # Preferred options for History
+export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_all_dups
@@ -27,7 +28,7 @@ setopt hist_ignore_space     # precede line with a space to exclude it from hist
 
 # Make sure '/' is not counted as a word character
 # doing this allows for ctrl+back-arrow to stop at forward-slashes
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 
 # used in subsequent directives...

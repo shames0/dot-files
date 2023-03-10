@@ -119,6 +119,12 @@ function! s:main_setup()
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
 
+  " set tab style for Makefiles
+  autocmd FileType make setlocal noexpandtab
+
+  " set tab style for yaml files
+  autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
 endfunction
 
 

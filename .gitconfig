@@ -12,27 +12,9 @@
 	ui = true
 
 [core]
-    pager = delta
     editor = vim
     excludesFile = ~/.gitignore
     whitespace = trailing-whitespace
 
-[delta]
-    navigate = true
-    light = false
-    line-numbers = true
-    theme = "Visual Studio Dark+"
-    # side-by-side = true
-    # hyperlinks = true
-
 [init]
 	defaultBranch = master
-
-[interactive]
-    diffFilter = delta --color-only
-
-[merge]
-    conflictstyle = diff3  # added from delta docs
-
-[diff]
-    colorMoved = default   # added from delta docs

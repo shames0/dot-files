@@ -58,11 +58,12 @@ function! s:main_setup()
         \'https://github.com/nathanaelkane/vim-indent-guides',
       \],
       \'pack/shames0/opt': [
-        \'https://github.com/tomasiser/vim-code-dark',
+        \'https://github.com/ctrlpvim/ctrlp.vim',
         \'https://github.com/editorconfig/editorconfig-vim',
         \'https://github.com/itchyny/lightline.vim',
-        \'https://github.com/tpope/vim-fugitive',
+        \'https://github.com/tomasiser/vim-code-dark',
         \'https://github.com/tommcdo/vim-fubitive',
+        \'https://github.com/tpope/vim-fugitive',
         \'https://github.com/w0rp/ale',
       \],
     \},
@@ -90,6 +91,15 @@ function! s:main_setup()
   " manage unified diff (:Git diff) colors (must come after 'colorscheme')
   hi diffAdded ctermfg=2 ctermbg=NONE cterm=NONE guifg=#50FA7B guibg=NONE gui=bold
   hi diffRemoved ctermfg=1 ctermbg=NONE cterm=NONE guifg=#FA5057 guibg=NONE gui=NONE
+
+  packadd! ctrlp.vim  " use ctrlp plugin
+  if executable('ag')
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  endif
 
   packadd! vim-fugitive            " use vim-fugitive plugin
   packadd! vim-fubitive            " use vim-fubitive plugin (bitbucket plugin)
